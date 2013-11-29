@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>NeuronDotNet</id>
+    <version>3.0</version>
+    <title>NeuronDotNet</title>
+    <authors>Vijeth D</authors>
+    <owners>Vijeth D</owners>
+    <licenseUrl>http://www.gnu.org/licenses/gpl.html</licenseUrl>
+    <projectUrl>http://neurondotnet.freehostia.com/index.html</projectUrl>
+    <iconUrl>http://neurondotnet.freehostia.com/style/logosmall.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>NeuronDotNet is a neural network engine written in C#. It provides an interface for advanced AI programmers to design various types of artificial neural networks and use them. More information is available at http://neurondotnet.freehostia.com</description>
+    <summary>NeuronDotNet is a neural network engine written in C#. It provides an interface for advanced AI programmers to design various types of artificial neural networks and use them. More information is available at http://neurondotnet.freehostia.com</summary>
+    <releaseNotes />
+    <copyright />
+    <language />
+    <tags>Neural Networks</tags>
+  </metadata>
+</package>
