@@ -1,8 +1,30 @@
 ﻿<Window x:Class="PBS.FirstRunGuideDialogue"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:resources="clr-namespace:PBS"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="FirstRunGuideDialogue" Height="300" Width="300">
+        xmlns:vm="clr-namespace:PBS.Models;assembly=PBS.Models"
+        Title="{x:Static resources:PBSStrings.StartDialogueTitle}" Height="300" Width="300"
+        Icon="Resources/MainWindowIcon.png"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <vm:FirstRunGuideDialogueModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="DarkGray">
+            <TextBlock Margin="5,5" Text="{x:Static resources:PBSStrings.StartDialogueMessage}"></TextBlock>
+        </Border>
+        <Border Grid.Row="1" Background="DeepSkyBlue">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="{x:Static resources:PBSStrings.AnalyzeCollectionButtonLabel}" Margin="5,2">
+                </Button>
+                <Button Content="{x:Static resources:PBSStrings.AnalyzeLaterButtonLabel}" Margin="5,2">
+                </Button>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
