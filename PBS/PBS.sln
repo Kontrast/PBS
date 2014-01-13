@@ -14,6 +14,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PBS.Models", "PBS.Models\PBS.Models.csproj", "{5D34AE85-8ACB-4A41-A33D-11A9F10B8EB7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{96688B4F-FAD7-40F3-9B72-ACEB301D1243}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{3D85728A-9011-4846-92F7-82D255A2CCE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +40,14 @@ Global
 		{5D34AE85-8ACB-4A41-A33D-11A9F10B8EB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D34AE85-8ACB-4A41-A33D-11A9F10B8EB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D34AE85-8ACB-4A41-A33D-11A9F10B8EB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96688B4F-FAD7-40F3-9B72-ACEB301D1243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96688B4F-FAD7-40F3-9B72-ACEB301D1243}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96688B4F-FAD7-40F3-9B72-ACEB301D1243}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96688B4F-FAD7-40F3-9B72-ACEB301D1243}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D85728A-9011-4846-92F7-82D255A2CCE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D85728A-9011-4846-92F7-82D255A2CCE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D85728A-9011-4846-92F7-82D255A2CCE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D85728A-9011-4846-92F7-82D255A2CCE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
