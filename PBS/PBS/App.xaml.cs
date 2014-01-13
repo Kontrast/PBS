@@ -17,11 +17,12 @@ namespace PBS
         {
             PBSCore core = PBSCore.Instance;
 
-            if (core.CollectionEmpty)
+            if (core.IsCollectionEmpty)
             {
                 ShutdownMode = ShutdownMode.OnExplicitShutdown;
                 FirstRunGuideDialogue dialogue = new FirstRunGuideDialogue();
                 dialogue.ShowDialog();
+                ShutdownMode = ShutdownMode.OnMainWindowClose;
             }
         }
     }

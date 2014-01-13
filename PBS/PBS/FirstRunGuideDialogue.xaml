@@ -20,9 +20,13 @@
         </Border>
         <Border Grid.Row="1" Background="DeepSkyBlue">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="{x:Static resources:PBSStrings.AnalyzeCollectionButtonLabel}" Margin="5,2">
+                <Button Content="{x:Static resources:PBSStrings.AnalyzeCollectionButtonLabel}"
+                        Command="{Binding Analyze}"
+                        Margin="5,2">
                 </Button>
-                <Button Content="{x:Static resources:PBSStrings.AnalyzeLaterButtonLabel}" Margin="5,2">
+                <Button Content="{x:Static resources:PBSStrings.AnalyzeLaterButtonLabel}" 
+                        IsCancel="True"
+                        Margin="5,2">
                 </Button>
             </StackPanel>
         </Border>
