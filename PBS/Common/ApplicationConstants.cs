@@ -17,5 +17,13 @@ namespace Common
         {
             get { return "PBS.db"; }
         }
+
+        /// <summary>
+        /// Gets the supported file extensions.
+        /// </summary>
+        public static string[] SupportedAudioFileExtensions
+        {
+            get { return new[] { ".mp3", ".wav" }; }
+        }
     }
 }

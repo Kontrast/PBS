@@ -6,7 +6,8 @@
         Title="{x:Static resources:PBSStrings.StartDialogueTitle}" Height="300" Width="300"
         Icon="Resources/MainWindowIcon.png"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Name="Window">
     <Window.DataContext>
         <vm:FirstRunGuideDialogueModel/>
     </Window.DataContext>
@@ -21,6 +22,7 @@
         <Border Grid.Row="1" Background="DeepSkyBlue">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Content="{x:Static resources:PBSStrings.AnalyzeCollectionButtonLabel}"
+                        CommandParameter="{Binding ElementName=Window}"
                         Command="{Binding Analyze}"
                         Margin="5,2">
                 </Button>

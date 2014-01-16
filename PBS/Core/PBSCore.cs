@@ -41,18 +41,20 @@ namespace Core
         /// <param name="path">The folder path.</param>
         public void AnalyzeCollection(string path)
         {
-            Thread Worker = new Thread(() => Analyze(path))
+            Thread worker = new Thread(() => ScanPath(path))
             {
                 IsBackground = true
             };
-            Worker.Start();
+            worker.Start();
         }
 
-        private void Analyze(string path)
+        private void ScanPath(string path)
         {
             try
             {
-
+                foreach (string filePath in DirectoryScanner.Scan(path, ApplicationConstants.SupportedAudioFileExtensions))
+                {
+                }
             }
             catch(Exception e)
             {
