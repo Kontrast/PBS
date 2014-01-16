@@ -51,6 +51,14 @@
       <Project>{40f1167d-61c1-4297-9c58-cfd9458a16b2}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
+      <Project>{96688B4F-FAD7-40F3-9B72-ACEB301D1243}</Project>
+      <Name>DataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{3D85728A-9011-4846-92F7-82D255A2CCE2}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

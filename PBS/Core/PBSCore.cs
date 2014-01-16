@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using Common;
+using DataAccessLayer;
+using Models;
 
 namespace Core
 {
@@ -28,11 +30,17 @@ namespace Core
         /// </summary>
         public bool IsCollectionEmpty { get; private set; }
 
+        public DataBase DataBase { get; set; }
+
         private PBSCore()
         {
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             string dbPath = Path.Combine(appDataPath, ApplicationConstants.PBSDbFileName);
             IsCollectionEmpty = !File.Exists(dbPath);
+            DataBase = new DataBase(dbPath)
+            {
+                DataProvider = new SqliteDataProvider()
+            };
         }
 
         /// <summary>
@@ -52,11 +60,25 @@ namespace Core
         {
             try
             {
+                IEnumerable<string> audioIndexes = DataBase.Records.Select(r => r.FullPath);
                 foreach (string filePath in DirectoryScanner.Scan(path, ApplicationConstants.SupportedAudioFileExtensions))
                 {
+                    if (!audioIndexes.Contains(filePath))
+                    {
+                        AudioRecord item = new AudioRecord()
+                        {
+                            FullPath = filePath
+                        };
+
+                        lock (DataBase.Records)
+                        {
+                            DataBase.Records.Add(item);
+                        }
+                        DataBase.IsChanged = true;
+                    }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 //TODO process possible exceptions
             }

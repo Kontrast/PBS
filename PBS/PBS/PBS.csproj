@@ -126,6 +126,14 @@
       <Project>{648fc709-f19e-41cb-a820-24f96dd5f351}</Project>
       <Name>Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
+      <Project>{96688b4f-fad7-40f3-9b72-aceb301d1243}</Project>
+      <Name>DataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{3d85728a-9011-4846-92f7-82d255a2cce2}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PBS.Models\PBS.Models.csproj">
       <Project>{5d34ae85-8acb-4a41-a33d-11a9f10b8eb7}</Project>
       <Name>PBS.Models</Name>

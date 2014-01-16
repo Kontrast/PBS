@@ -41,6 +41,21 @@ namespace Models
         {
             Data = new List<IStorable>();
         }
+
+        //public void Store(BinaryWriter bw)
+        //{
+        //    bw.Write((byte)0);//version
+        //    bw.Write(FullPath ?? "");
+        //    bw.Write((byte)State);
+        //    //save Data
+        //    bw.Write(Data.Count);
+        //    foreach (var data in Data)
+        //    {
+        //        var id = DB.GetIdByType(data.GetType());//id of type
+        //        bw.Write(id);
+        //        data.Store(bw);
+        //    }
+        //}
     }
 
     /// <summary>
