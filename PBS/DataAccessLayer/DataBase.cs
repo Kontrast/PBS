@@ -25,22 +25,19 @@ namespace DataAccessLayer
         public bool IsChanged { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DataBase"/> class.
+        /// Saves the specified full path.
         /// </summary>
-        /// <param name="fileName">Name of the file.</param>
-        public DataBase(string fileName)
-        {
-            Records = new Collection<AudioRecord>();
-            Load(fileName);
-        }
-
-        public void Save(string fullPath)
+        public void Save()
         {
             DataProvider.Save(Records);
         }
 
-        public void Load(string fileName)
+        /// <summary>
+        /// Loads records.
+        /// </summary>
+        public void Load()
         {
+            Records = DataProvider.Load();
         }
     }
 }

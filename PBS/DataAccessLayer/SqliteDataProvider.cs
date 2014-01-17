@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -20,7 +21,25 @@ namespace DataAccessLayer
         /// </summary>
         public ICollection<AudioRecord> Load()
         {
-            return null;
+            Collection<AudioRecord> records = new Collection<AudioRecord>();
+            if (File.Exists(Path))
+                using (var fs = new FileStream(Path, FileMode.Open, FileAccess.Read))
+                using (var zip = new GZipStream(fs, CompressionMode.Decompress, false))
+                using (var br = new BinaryReader(zip, Encoding.UTF8))
+                    try
+                    {
+                        br.ReadByte();//version
+                        var count = br.ReadInt32();
+                        for (int i = 0; i < count; i++)
+                        {
+                            var item = new AudioRecord();
+                            item.Load(br);
+                            records.Add(item);
+                        }
+                    }
+                    catch (EndOfStreamException) {/*end of stream*/}
+
+            return records;
         }
 
         /// <summary>

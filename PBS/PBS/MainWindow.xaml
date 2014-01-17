@@ -1,7 +1,11 @@
 ﻿<Window x:Class="PBS.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:PBS.Models;assembly=PBS.Models"
         Title="MainWindow" Height="350" Width="525">
+    <Window.DataContext>
+        <vm:MainWindowModel/>
+    </Window.DataContext>
     <Grid>
         
     </Grid>

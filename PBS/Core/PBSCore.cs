@@ -39,10 +39,11 @@ namespace Core
         {
             string dbPath = FileLocationProvider.DefaultDBPath;
             IsCollectionEmpty = !File.Exists(dbPath);
-            DataBase = new DataBase(dbPath)
+            DataBase = new DataBase()
             {
                 DataProvider = new SqliteDataProvider() { Path = dbPath }
             };
+            DataBase.Load();
         }
 
         /// <summary>
@@ -79,8 +80,7 @@ namespace Core
                         DataBase.IsChanged = true;
                     }
                 }
-                string dbPath = FileLocationProvider.DefaultDBPath;
-                DataBase.Save(dbPath);
+                DataBase.Save();
             }
             catch (Exception e)
             {

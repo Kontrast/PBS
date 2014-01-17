@@ -32,6 +32,9 @@ namespace PBS.Models
             }
         }
 
+        /// <summary>
+        /// Gets the analyze command.
+        /// </summary>
         public ICommand Analyze
         {
             get { return new RelayCommand(AnalyzeExecute); }
