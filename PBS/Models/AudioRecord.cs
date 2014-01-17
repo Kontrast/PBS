@@ -9,7 +9,7 @@ namespace Models
     /// <summary>
     /// Represents audio record in database
     /// </summary>
-    public class AudioRecord
+    public class AudioRecord : IStorable
     {
         /// <summary>
         /// Gets or sets the full path.
@@ -27,7 +27,7 @@ namespace Models
         /// <summary>
         /// Gets or sets the state.
         /// </summary>
-        public virtual AudioState State { get; set; }
+        public virtual RecordState State { get; set; }
 
         /// <summary>
         /// Gets or sets the data.
@@ -42,38 +42,26 @@ namespace Models
             Data = new List<IStorable>();
         }
 
-        //public void Store(BinaryWriter bw)
-        //{
-        //    bw.Write((byte)0);//version
-        //    bw.Write(FullPath ?? "");
-        //    bw.Write((byte)State);
-        //    //save Data
-        //    bw.Write(Data.Count);
-        //    foreach (var data in Data)
-        //    {
-        //        var id = DB.GetIdByType(data.GetType());//id of type
-        //        bw.Write(id);
-        //        data.Store(bw);
-        //    }
-        //}
-    }
+        /// <summary>
+        /// Stores the specified binary writer.
+        /// </summary>
+        /// <param name="bw">The binary writer.</param>
+        public void Store(BinaryWriter bw)
+        {
+            bw.Write((byte)0);//version
+            bw.Write(FullPath ?? "");
+            bw.Write((byte)State);
+        }
 
-    /// <summary>
-    /// State of audio file in collection
-    /// </summary>
-    public enum AudioState : byte
-    {
         /// <summary>
-        /// File is unprocessed
+        /// Loads the specified binary reader.
         /// </summary>
-        Unprocessed,
-        /// <summary>
-        /// File is processed
-        /// </summary>
-        Processed,
-        /// <summary>
-        /// Analyzing file was unsuccessful
-        /// </summary>
-        Bad
+        /// <param name="br">The binary reader.</param>
+        public virtual void Load(BinaryReader br)
+        {
+            br.ReadByte();//version
+            FullPath = br.ReadString();
+            State = (RecordState)br.ReadByte();
+        }
     }
 }

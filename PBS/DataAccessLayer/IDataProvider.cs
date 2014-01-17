@@ -11,11 +11,11 @@ namespace DataAccessLayer
         /// <summary>
         /// Loads data from db
         /// </summary>
-        List<AudioRecord> Load();
+        ICollection<AudioRecord> Load();
 
         /// <summary>
         /// Stores the specified records.
         /// </summary>
-        void Save(List<AudioRecord> records);
+        void Save(ICollection<AudioRecord> records);
     }
 }

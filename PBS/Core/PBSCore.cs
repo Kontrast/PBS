@@ -30,16 +30,18 @@ namespace Core
         /// </summary>
         public bool IsCollectionEmpty { get; private set; }
 
-        public DataBase DataBase { get; set; }
+        /// <summary>
+        /// Gets or sets the data base.
+        /// </summary>
+        public static DataBase DataBase { get; set; }
 
         private PBSCore()
         {
-            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            string dbPath = Path.Combine(appDataPath, ApplicationConstants.PBSDbFileName);
+            string dbPath = FileLocationProvider.DefaultDBPath;
             IsCollectionEmpty = !File.Exists(dbPath);
             DataBase = new DataBase(dbPath)
             {
-                DataProvider = new SqliteDataProvider()
+                DataProvider = new SqliteDataProvider() { Path = dbPath }
             };
         }
 
@@ -77,6 +79,8 @@ namespace Core
                         DataBase.IsChanged = true;
                     }
                 }
+                string dbPath = FileLocationProvider.DefaultDBPath;
+                DataBase.Save(dbPath);
             }
             catch (Exception e)
             {
