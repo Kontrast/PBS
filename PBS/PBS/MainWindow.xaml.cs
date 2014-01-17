@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -11,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PBS.Models;
 
 namespace PBS
 {
@@ -22,6 +24,15 @@ namespace PBS
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void MainWindow_OnClosed(object sender, EventArgs e)
+        {
+            MainWindowModel mainWindowModel = DataContext as MainWindowModel;
+            if (mainWindowModel != null)
+            {
+                mainWindowModel.SaveChanges();
+            }
         }
     }
 }

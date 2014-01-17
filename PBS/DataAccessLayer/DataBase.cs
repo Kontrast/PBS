@@ -29,7 +29,10 @@ namespace DataAccessLayer
         /// </summary>
         public void Save()
         {
-            DataProvider.Save(Records);
+            if (IsChanged)
+            {
+                DataProvider.Save(Records);
+            }
         }
 
         /// <summary>

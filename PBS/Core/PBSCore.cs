@@ -59,6 +59,14 @@ namespace Core
             worker.Start();
         }
 
+        /// <summary>
+        /// Saves the changes.
+        /// </summary>
+        public void SaveChanges()
+        {
+            DataBase.Save();
+        }
+
         private void ScanPath(string path)
         {
             try
@@ -80,7 +88,6 @@ namespace Core
                         DataBase.IsChanged = true;
                     }
                 }
-                DataBase.Save();
             }
             catch (Exception e)
             {
