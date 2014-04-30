@@ -25,5 +25,13 @@ namespace Common
         {
             get { return new[] { ".mp3", ".wav" }; }
         }
+
+        /// <summary>
+        /// Gets the process interval.
+        /// </summary>
+        public static double ProcessInterval
+        {
+            get { return 1000; }
+        }
     }
 }

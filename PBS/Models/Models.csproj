@@ -44,7 +44,6 @@
   <ItemGroup>
     <Compile Include="AudioRecord.cs" />
     <Compile Include="IStorable.cs" />
-    <Compile Include="ParameterType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecordState.cs" />
     <Compile Include="Samples.cs" />

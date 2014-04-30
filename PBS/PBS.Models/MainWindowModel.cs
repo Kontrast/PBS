@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Timers;
+using Common;
 using Core;
 
 namespace PBS.Models
 {
     public class MainWindowModel
     {
+        private readonly Timer processingTimer = new Timer(ApplicationConstants.ProcessInterval);
+
         /// <summary>
         /// The core
         /// </summary>
@@ -20,6 +20,9 @@ namespace PBS.Models
         public MainWindowModel()
         {
             core = PBSCore.Instance;
+
+            processingTimer.Elapsed += ProcessNewRecords;
+            processingTimer.Start();
         }
 
         /// <summary>
@@ -28,6 +31,22 @@ namespace PBS.Models
         public void SaveChanges()
         {
             core.SaveChanges();
+        }
+
+        private void ProcessNewRecords(object sender, ElapsedEventArgs e)
+        {
+            processingTimer.Stop();
+
+            try
+            {
+                core.ProcessNewRecords();
+            }
+            catch (Exception exception)
+            {
+                //TODO:ProcessExceptions
+            }
+
+            processingTimer.Start();
         }
     }
 }

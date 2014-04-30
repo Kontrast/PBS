@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using Common;
+using Core.AudioProcessing;
 using DataAccessLayer;
 using Models;
 
@@ -16,6 +17,8 @@ namespace Core
     public class PBSCore
     {
         private static PBSCore instance;
+
+        private static AudioProcessor audioProcessor = new AudioProcessor();
 
         /// <summary>
         /// Gets the instance.
@@ -65,6 +68,21 @@ namespace Core
         public void SaveChanges()
         {
             DataBase.Save();
+        }
+
+        /// <summary>
+        /// Processes new records added to data base.
+        /// </summary>
+        public void ProcessNewRecords()
+        {
+            List<AudioRecord> unprocessedRecords = new List<AudioRecord>();
+
+            lock (DataBase.Records)
+            {
+                unprocessedRecords.AddRange(DataBase.Records.Where(record => record.State == RecordState.Unprocessed));
+            }
+
+            audioProcessor.Process(unprocessedRecords);
         }
 
         private void ScanPath(string path)

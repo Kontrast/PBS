@@ -122,6 +122,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{40f1167d-61c1-4297-9c58-cfd9458a16b2}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{648fc709-f19e-41cb-a820-24f96dd5f351}</Project>
       <Name>Core</Name>
