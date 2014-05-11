@@ -48,7 +48,6 @@ namespace Models
         /// <param name="bw">The binary writer.</param>
         public void Store(BinaryWriter bw)
         {
-            bw.Write((byte)0);//version
             bw.Write(FullPath ?? "");
             bw.Write((byte)State);
         }
@@ -59,9 +58,18 @@ namespace Models
         /// <param name="br">The binary reader.</param>
         public virtual void Load(BinaryReader br)
         {
-            br.ReadByte();//version
             FullPath = br.ReadString();
             State = (RecordState)br.ReadByte();
+        }
+
+        public Stream GetSourceStream()
+        {
+            return File.Open(FullPath, FileMode.Open, FileAccess.Read, FileShare.Read);
+        }
+
+        public string GetSourceExtension()
+        {
+            return Path.GetExtension(FullPath);
         }
     }
 }

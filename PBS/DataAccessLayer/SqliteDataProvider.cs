@@ -28,7 +28,6 @@ namespace DataAccessLayer
                 using (var br = new BinaryReader(zip, Encoding.UTF8))
                     try
                     {
-                        br.ReadByte();//version
                         var count = br.ReadInt32();
                         for (int i = 0; i < count; i++)
                         {
@@ -55,7 +54,6 @@ namespace DataAccessLayer
             using (var buff = new BufferedStream(zip, 8192))
             using (var bw = new BinaryWriter(buff, Encoding.UTF8))
             {
-                bw.Write((byte)0);//version
                 bw.Write(records.Count);
                 foreach (AudioRecord record in records)
                 {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.AudioProcessing
 {
-    public interface IAudioDecoder
+    public interface IAudioDecoder : IDisposable
     {
         /// <summary>
         /// Decodes the specified stream.
@@ -17,5 +17,13 @@ namespace Core.AudioProcessing
         /// <param name="fileExt">The file ext.</param>
         /// <returns></returns>
         AudioInfo Decode(Stream stream, float targetBitRate, string fileExt);
+
+        /// <summary>
+        /// Gets a value indicating whether [allows multithreading].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [allows multiThreading]; otherwise, <c>false</c>.
+        /// </value>
+        bool AllowsMultiThreading { get; }
     }
 }

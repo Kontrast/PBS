@@ -5,14 +5,77 @@ namespace Models
     public class Samples : IStorable
     {
         /// <summary>
-        /// The values
+        /// Gets or sets the bit rate.
         /// </summary>
-        private float[] values;
+        public float BitRate { get; set; }
 
         /// <summary>
-        /// The bit rate
+        /// Gets or sets the values.
         /// </summary>
-        private float bitRate;
+        public float[] Values { get; set; }
+
+        /// <summary>
+        /// Returns sample for any point (with linear interpolation)
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public virtual float this[float index]
+        {
+            get
+            {
+                var intIndex = (int)index;
+                if (intIndex < 0) return 0;
+                if (index > Values.Length) return 0;
+                if (intIndex == Values.Length) return Values[intIndex - 1];
+
+                var rest = index - intIndex;
+                return (1 - rest) * Values[intIndex] + rest * Values[intIndex + 1];//linear interpolation
+            }
+        }
+
+        /// <summary>
+        /// Normalizes amplitude (by default from -1 to +1)
+        /// </summary>
+        unsafe public void Normalize(float k = 1f)
+        {
+            var l = Values.Length;
+
+            //find abs max sample
+            float max = 0;
+            fixed (float* valuesPtr = Values)
+            {
+                var ptr = valuesPtr;
+                for (int i = 0; i < l; i++)
+                {
+                    var v = *ptr > 0 ? *ptr : -*ptr;
+                    if (v > max)
+                        max = v;
+                    ptr++;
+                }
+            }
+
+            //normalize
+            if (max > float.Epsilon)
+                Scale(k / max);
+        }
+
+        /// <summary>
+        /// Scales amplitude of samples
+        /// </summary>
+        unsafe public void Scale(float volumeKoeff)
+        {
+            var l = Values.Length;
+
+            fixed (float* valuesPtr = Values)
+            {
+                var ptr = valuesPtr;
+                for (int i = 0; i < l; i++)
+                {
+                    *ptr *= volumeKoeff;
+                    ptr++;
+                }
+            }
+        }
 
         /// <summary>
         /// Stores the specified bw.
@@ -20,10 +83,9 @@ namespace Models
         /// <param name="bw">The bw.</param>
         public void Store(System.IO.BinaryWriter bw)
         {
-            bw.Write((byte)0);//version
-            bw.Write(bitRate);
-            bw.Write((int) values.Length);
-            foreach (var v in values)
+            bw.Write(BitRate);
+            bw.Write((int) Values.Length);
+            foreach (var v in Values)
             {
                 bw.Write(v);
             }
@@ -35,13 +97,12 @@ namespace Models
         /// <param name="br">The br.</param>
         public void Load(System.IO.BinaryReader br)
         {
-            br.ReadByte();//version
-            bitRate = br.ReadSingle();
+            BitRate = br.ReadSingle();
             var count = br.ReadInt32();
-            values = new float[count];
+            Values = new float[count];
             for (int i = 0; i < count; i++)
             {
-                values[i] = br.ReadSingle();
+                Values[i] = br.ReadSingle();
             }
         }
     }
