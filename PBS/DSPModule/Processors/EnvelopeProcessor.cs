@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DSPModule.Processors
+{
+    /// <summary>
+    /// Builds amplitude envelope
+    /// </summary>
+    public class EnvelopeProcessor
+    {
+
+    }
+}

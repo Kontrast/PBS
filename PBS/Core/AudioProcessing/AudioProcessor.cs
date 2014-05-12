@@ -17,6 +17,7 @@ namespace Core.AudioProcessing
         protected DSPFactory factory = new DSPFactory();
         protected int itemsCount;
         private readonly Queue<AudioRecord> recordsQueue = new Queue<AudioRecord>();
+        public event EventHandler<ProgressChangedEventArgs> Progress;
 
         /// <summary>
         /// Requested bitrate of signal after decoding
@@ -50,6 +51,7 @@ namespace Core.AudioProcessing
                 }
             }
 
+            OnProcessingProgress(new ProgressChangedEventArgs(100, null));
         }
 
         private void ProcessMultiThreading(IAudioDecoder decoder)
@@ -80,6 +82,7 @@ namespace Core.AudioProcessing
             int counter = 0;
             AudioRecord item;
             while ((item = GetItemFromQueue()) != null)
+            {
                 try
                 {
                     counter++;
@@ -109,6 +112,9 @@ namespace Core.AudioProcessing
                 {
                     item.State = RecordState.Bad;
                 }
+
+                OnProcessingProgress(new ProgressChangedEventArgs(100 * (itemsCount - recordsQueue.Count) / itemsCount, null));
+            }
         }
         protected virtual AudioRecord GetItemFromQueue()
         {
@@ -121,6 +127,14 @@ namespace Core.AudioProcessing
             }
 
             return null;
+        }
+
+        private void OnProcessingProgress(ProgressChangedEventArgs e)
+        {
+            if (Progress != null)
+            {
+                Progress(this, e);
+            }
         }
     }
 }

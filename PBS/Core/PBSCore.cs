@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -71,9 +72,10 @@ namespace Core
         }
 
         /// <summary>
-        /// Processes new records added to data base.
+        /// Processes the new records.
         /// </summary>
-        public void ProcessNewRecords()
+        /// <param name="progressCallback">The progress callback.</param>
+        public void ProcessNewRecords(EventHandler<ProgressChangedEventArgs> progressCallback)
         {
             List<AudioRecord> unprocessedRecords = new List<AudioRecord>();
 
@@ -82,6 +84,7 @@ namespace Core
                 unprocessedRecords.AddRange(DataBase.Records.Where(record => record.State == RecordState.Unprocessed));
             }
 
+            audioProcessor.Progress += progressCallback;
             audioProcessor.Process(unprocessedRecords);
         }
 
