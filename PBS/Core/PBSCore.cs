@@ -88,6 +88,14 @@ namespace Core
             audioProcessor.Process(unprocessedRecords);
         }
 
+        /// <summary>
+        /// Gets the processed records.
+        /// </summary>
+        public IEnumerable<AudioRecord> GetProcessedRecords()
+        {
+            return DataBase.Records;
+        }
+
         private void ScanPath(string path)
         {
             try

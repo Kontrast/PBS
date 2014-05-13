@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Timers;
 using Common;
 using Core;
@@ -38,7 +39,10 @@ namespace PBS.Models
 
         public List<AudioRecord> Records
         {
-            get { return records; }
+            get
+            {
+                return records;
+            }
             set
             {
                 records = value;
@@ -52,9 +56,12 @@ namespace PBS.Models
         public MainWindowModel()
         {
             core = PBSCore.Instance;
-
+            
             processingTimer.Elapsed += ProcessNewRecords;
             processingTimer.Start();
+
+            Records = new List<AudioRecord>();
+            Records.AddRange(core.GetProcessedRecords());
         }
 
         /// <summary>
@@ -92,6 +99,7 @@ namespace PBS.Models
         private void UpdateProcessingProgress(object sender, ProgressChangedEventArgs e)
         {
             ProcessingProgress = e.ProgressPercentage;
+            Records = core.GetProcessedRecords().ToList();
         }
     }
 }

@@ -12,6 +12,15 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="14"></RowDefinition>
         </Grid.RowDefinitions>
+        <ListBox ItemsSource="{Binding Records, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Text="{Binding ShortName, Mode=OneWay}"></TextBox>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
         <ProgressBar Grid.Row="1" Value="{Binding ProcessingProgress, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                      Maximum="100" Minimum="0" Margin="5,2"/>
