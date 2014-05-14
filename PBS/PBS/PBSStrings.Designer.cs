@@ -79,6 +79,24 @@ namespace PBS {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Find similar songs.
+        /// </summary>
+        public static string FindSimilarMenuItem {
+            get {
+                return ResourceManager.GetString("FindSimilarMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Play.
+        /// </summary>
+        public static string PlayMenuItem {
+            get {
+                return ResourceManager.GetString("PlayMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Database is empty!
         ///Do you want to analyze your music collection now? .
         /// </summary>

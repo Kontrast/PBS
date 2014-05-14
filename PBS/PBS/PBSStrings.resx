@@ -123,6 +123,12 @@
   <data name="AnalyzeLaterButtonLabel" xml:space="preserve">
     <value>I'll do it later</value>
   </data>
+  <data name="FindSimilarMenuItem" xml:space="preserve">
+    <value>Find similar songs</value>
+  </data>
+  <data name="PlayMenuItem" xml:space="preserve">
+    <value>Play</value>
+  </data>
   <data name="StartDialogueMessage" xml:space="preserve">
     <value>Database is empty!
 Do you want to analyze your music collection now? </value>

@@ -2,27 +2,44 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:PBS.Models;assembly=PBS.Models"
+        xmlns:resources="clr-namespace:PBS"
         Title="MainWindow" Height="350" Width="525"
         Closed="MainWindow_OnClosed">
-    <Window.DataContext>
-        <vm:MainWindowModel/>
-    </Window.DataContext>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="14"></RowDefinition>
-        </Grid.RowDefinitions>
-        <ListBox ItemsSource="{Binding Records, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox Text="{Binding ShortName, Mode=OneWay}"></TextBox>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+  <Window.DataContext>
+    <vm:MainWindowModel/>
+  </Window.DataContext>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*"></RowDefinition>
+      <RowDefinition Height="14"></RowDefinition>
+    </Grid.RowDefinitions>
+    <ListBox ItemsSource="{Binding Records, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <StackPanel Orientation="Horizontal">
+            <TextBox Text="{Binding ShortName, Mode=OneWay}"
+                     Tag="{Binding DataContext ,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}">
+              <TextBox.ContextMenu>
+                <ContextMenu>
+                  <MenuItem Header="{x:Static resources:PBSStrings.PlayMenuItem}"
+                            Command="{Binding PlacementTarget.Tag.Play,
+                                              RelativeSource={RelativeSource Mode=FindAncestor, 
+                                              AncestorType=ContextMenu}}">
+                  </MenuItem>
+                  <Separator/>
+                  <MenuItem Header="{x:Static resources:PBSStrings.FindSimilarMenuItem}"
+                            Command="{Binding PlacementTarget.Tag.FindSimilar,
+                                              RelativeSource={RelativeSource Mode=FindAncestor, 
+                                              AncestorType=ContextMenu}}"></MenuItem>
+                </ContextMenu>
+              </TextBox.ContextMenu>
+            </TextBox>
+          </StackPanel>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
 
-        <ProgressBar Grid.Row="1" Value="{Binding ProcessingProgress, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
-                     Maximum="100" Minimum="0" Margin="5,2"/>
-    </Grid>
+    <ProgressBar Grid.Row="1" Value="{Binding ProcessingProgress, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                 Maximum="100" Minimum="0" Margin="5,2"/>
+  </Grid>
 </Window>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Timers;
+using System.Windows.Input;
 using Common;
 using Core;
 using Models;
@@ -51,6 +52,22 @@ namespace PBS.Models
         }
 
         /// <summary>
+        /// Gets the play command.
+        /// </summary>
+        public ICommand Play
+        {
+            get { return new RelayCommand(PlayExecute); }
+        }
+
+        /// <summary>
+        /// Gets the find similar command.
+        /// </summary>
+        public ICommand FindSimilar
+        {
+            get { return new RelayCommand(FindSimilarExecute); }
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="MainWindowModel"/> class.
         /// </summary>
         public MainWindowModel()
@@ -70,6 +87,14 @@ namespace PBS.Models
         public void SaveChanges()
         {
             core.SaveChanges();
+        }
+
+        private void PlayExecute(object parameter)
+        {
+        }
+
+        private void FindSimilarExecute(object parameter)
+        {
         }
 
         protected void NotifyPropertyChange(string propertyName)
